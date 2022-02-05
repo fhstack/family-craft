@@ -11,7 +11,7 @@ import (
 func main() {
 	r := gin.Default()
 
-	r.GET("/family/cat/lockspin/:angle", handler.CatLockSpin)
+	r.GET("/family/cat/lockspin", handler.CatLockSpin)
 
 	hardware.Init()
 	log.Println("server start")

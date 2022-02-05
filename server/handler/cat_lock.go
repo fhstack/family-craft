@@ -14,7 +14,7 @@ import (
 var catLock = util.NewLock()
 
 func CatLockSpin(c *gin.Context) {
-	angleStr := c.Param("angle")
+	angleStr := c.Query("angle")
 	log.Printf("recv spin lock, angle: %s", angleStr)
 	angle, err := strconv.ParseInt(angleStr, 10, 64)
 	if err != nil {
