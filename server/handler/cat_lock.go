@@ -19,7 +19,7 @@ func CatLockSpin(c *gin.Context) {
 	angle, err := strconv.ParseInt(angleStr, 10, 64)
 	if err != nil {
 		log.Printf("param illegal: %s", err)
-		c.JSON(http.StatusOK, BuildRespByErr(err))
+		c.JSON(http.StatusOK, BuildParamIllegalResp(err.Error()))
 		return
 	}
 
