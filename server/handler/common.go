@@ -1,5 +1,7 @@
 package handler
 
+import "github.com/fhstack/family-craft/server/consts"
+
 type Response struct {
 	Code    int
 	Message string
@@ -16,5 +18,11 @@ func BuildRespByErr(err error) *Response {
 func BuildResp(c interface{}) *Response {
 	return &Response{
 		Content: c,
+	}
+}
+
+func BuildSuccResp() *Response {
+	return &Response{
+		Code: consts.Code_SUCC,
 	}
 }

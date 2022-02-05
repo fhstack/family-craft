@@ -33,5 +33,5 @@ func CatLockSpin(c *gin.Context) {
 	}
 	defer catLock.Unlock()
 	hardware.SpinAndResetCatLock(int32(angle))
-	c.JSON(http.StatusOK, &Response{})
+	c.JSON(http.StatusOK, BuildSuccResp())
 }
