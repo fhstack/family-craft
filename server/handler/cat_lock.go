@@ -25,13 +25,10 @@ func CatLockSpin(c *gin.Context) {
 
 	ok := catLock.TryLock()
 	if !ok {
-		c.JSON(http.StatusOK, &Response{
-			Code:    consts.ErrCode_Locking,
-			Message: consts.ErrCode_Locking_Msg,
-		})
+		c.JSON(http.StatusOK, BuildRespByCode(consts.ErrCode_Locking))
 		return
 	}
 	defer catLock.Unlock()
 	hardware.SpinAndResetCatLock(int32(angle))
-	c.JSON(http.StatusOK, BuildSuccResp())
+	c.JSON(http.StatusOK, BuildSuccResp(nil))
 }
