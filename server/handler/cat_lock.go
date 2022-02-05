@@ -13,7 +13,7 @@ import (
 
 var catLock = util.NewLock()
 
-func CatLockSpin(c *gin.Context) {
+func CatLockSpinHandler(c *gin.Context) {
 	angleStr := c.Query("angle")
 	log.Printf("recv spin lock, angle: %s", angleStr)
 	angle, err := strconv.ParseInt(angleStr, 10, 64)
@@ -29,6 +29,6 @@ func CatLockSpin(c *gin.Context) {
 		return
 	}
 	defer catLock.Unlock()
-	hardware.SpinAndResetCatLock(int32(angle))
+	hardware.SpinCatLock(int32(angle))
 	c.JSON(http.StatusOK, BuildSuccResp(nil))
 }
