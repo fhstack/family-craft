@@ -6,6 +6,7 @@ P_SERVO = 8  # GPIO端口号，根据实际修改
 fPWM = 50  # Hz (软件PWM方式，频率不能设置过高)
 b = 2.5
 GPIO.setmode(GPIO.BOARD)
+GPIO.setwarnings(False) 
 GPIO.setup(P_SERVO, GPIO.OUT)
 pwm = GPIO.PWM(P_SERVO, fPWM)
 pwm.start(0)

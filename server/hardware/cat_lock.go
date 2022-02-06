@@ -12,7 +12,7 @@ func SpinCatLock(angle int32) error {
 		return errors.New("illegal angle")
 	}
 
-	resp, err := http.Get("localhost:8888/" + strconv.FormatInt(int64(angle), 10))
+    resp, err := http.Get("http://localhost:8888/" + strconv.FormatInt(int64(angle), 10))
 	if err != nil {
 		return err
 	}
