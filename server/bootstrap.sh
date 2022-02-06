@@ -1,3 +1,3 @@
 #!/usr/bin/bash 
-
-sudo ./output/server
+python ./output/cat_lock_api.py
+./output/server

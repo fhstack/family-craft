@@ -18,7 +18,7 @@ func CatLockSpinHandler(c *gin.Context) {
 	log.Printf("recv spin lock, angle: %s", angleStr)
 	angle, err := strconv.ParseInt(angleStr, 10, 64)
 	if err != nil {
-		log.Printf("param illegal: %s", err)
+		log.Printf("param illegal: %v", err)
 		c.JSON(http.StatusOK, BuildParamIllegalResp(err.Error()))
 		return
 	}
@@ -29,6 +29,11 @@ func CatLockSpinHandler(c *gin.Context) {
 		return
 	}
 	defer catLock.Unlock()
-	hardware.SpinCatLock(int32(angle))
+    err = hardware.SpinCatLock(int32(angle))
+    if err != nil {
+		log.Printf("SpinCatLock failed: %v", err)
+		c.JSON(http.StatusOK, BuildRespByErr(err))
+		return
+    }
 	c.JSON(http.StatusOK, BuildSuccResp(nil))
 }

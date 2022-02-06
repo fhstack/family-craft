@@ -2,7 +2,8 @@ package hardware
 
 import (
 	"errors"
-	"os/exec"
+	"fmt"
+	"net/http"
 	"strconv"
 )
 
@@ -11,10 +12,13 @@ func SpinCatLock(angle int32) error {
 		return errors.New("illegal angle")
 	}
 
-	args := []string{"cat_lock.py", strconv.FormatInt(int64(angle), 10)}
-	err := exec.Command("python", args...).Run()
+	resp, err := http.Get("localhost:8888/" + strconv.FormatInt(int64(angle), 10))
 	if err != nil {
 		return err
+	}
+
+	if resp.StatusCode != http.StatusOK {
+		return fmt.Errorf("SpinCatLock failed, api status code: %d", resp.StatusCode)
 	}
 
 	return nil
